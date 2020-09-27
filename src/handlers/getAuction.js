@@ -15,7 +15,7 @@ async function getAuction(event, context) {
     const result = await dynamodb
       .get({
         TableName: process.env.AUCTIONS_TABLE_NAME,
-        key: { id },
+        Key: { id },
       })
       .promise();
 
@@ -26,7 +26,7 @@ async function getAuction(event, context) {
   }
 
   if (!auction) {
-    throw new createError.notFound(`Auction with ID "${id}" not found`);
+    throw new createError.NotFound(`Auction with ID "${id}" not found`);
   }
 
   return {
